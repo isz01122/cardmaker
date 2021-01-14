@@ -1,5 +1,5 @@
 import React from "react";
-import styels from "./card.module.css";
+import styles from "./card.module.css";
 
 const DEFAULT_IMAGE = "/images/default_logo.png";
 const Card = ({ card }) => {
@@ -15,14 +15,14 @@ const Card = ({ card }) => {
   } = card;
   const url = fileURL || DEFAULT_IMAGE;
   return (
-    <li className={`${styels.card} ${getStyles(theme)}`}>
-      <img className={styels.avatar} src={url} alt="profile photo" />
-      <div className={styels.info}>
-        <h1 className={styels.name}>{name}</h1>
-        <p className={styels.company}>{company}</p>
-        <p className={styels.title}>{title}</p>
-        <p className={styels.email}>{email}</p>
-        <p className={styels.message}>{message}</p>
+    <li className={`${styles.card} ${getStyles(theme)}`}>
+      <img className={styles.avatar} src={url} alt="profile photo" />
+      <div className={styles.info}>
+        <h1 className={styles.name}>{name}</h1>
+        <p className={styles.company}>{company}</p>
+        <p className={styles.title}>{title}</p>
+        <p className={styles.email}>{email}</p>
+        <p className={styles.message}>{message}</p>
       </div>
     </li>
   );
@@ -30,12 +30,12 @@ const Card = ({ card }) => {
 
 function getStyles(theme) {
   switch (theme) {
-    case "dark":
-      return styels.dark;
     case "light":
-      return styels.light;
+      return styles.light;
+    case "dark":
+      return styles.dark;
     case "colorful":
-      return styels.colorful;
+      return styles.colorful;
     default:
       throw new Error(`unknown theme: ${theme}`);
   }
