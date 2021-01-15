@@ -6,43 +6,12 @@ import Header from "../header/header";
 import Preview from "../preview/preview";
 import styles from "./maker.module.css";
 
-const Maker = ({ FileInput, authService }) => {
+const Maker = ({ FileInput, authService, cardRepository }) => {
+  const historyState = useHistory().state;
   //성능을 위해 오브젝트로 관리
-  const [cards, setCards] = useState({
-    1: {
-      id: "1",
-      name: "Dori",
-      company: "Apple",
-      theme: "dark",
-      title: "front-end",
-      email: "Dori@gamil.com",
-      message: "I like React JS",
-      fileName: "Dori",
-      fileURL: null,
-    },
-    2: {
-      id: "2",
-      name: "Jiny",
-      company: "Samsung",
-      theme: "light",
-      title: "full-stack",
-      email: "Jiny@gamil.com",
-      message: "I love Programing",
-      fileName: "Jiny",
-      fileURL: null,
-    },
-    3: {
-      id: "3",
-      name: "Goorm",
-      company: "Google",
-      theme: "colorful",
-      title: "software engineer",
-      email: "Goorm@gamil.com",
-      message: "I like sky, look at this",
-      fileName: "Goorm",
-      fileURL: null,
-    },
-  });
+  const [cards, setCards] = useState({});
+  const [userId, setUserId] = useState(historyState && historyState.id);
+
   const history = useHistory();
 
   //로그 아웃 함수
@@ -50,10 +19,26 @@ const Maker = ({ FileInput, authService }) => {
     authService.logout();
   };
 
+  //realtime database
+  //mount가 되었을때, 사용자 아이디가 변경되었을때 사용
+  useEffect(() => {
+    if (!userId) {
+      return;
+    } //stopSync는 ref값만을 가지고 있음, 콜백 리턴값(ref.off()) unmount시 호출해줘야 함
+    const stopSync = cardRepository.syncCards(userId, (cards) => {
+      setCards(cards);
+    });
+    return () => {
+      stopSync();
+    };
+  }, [userId]);
+
   //로그 아웃이 되어 유저 정보가 없어진다면 메인화면으로 보낸다
   useEffect(() => {
     authService.onAuthChange((user) => {
-      if (!user) {
+      if (user) {
+        setUserId(user.uid);
+      } else {
         history.push("/");
       }
     });
@@ -65,6 +50,7 @@ const Maker = ({ FileInput, authService }) => {
       updated[card.id] = card;
       return updated;
     });
+    cardRepository.saveCard(userId, card);
   };
 
   const deleteCard = (card) => {
@@ -73,6 +59,7 @@ const Maker = ({ FileInput, authService }) => {
       delete updated[card.id];
       return updated;
     });
+    cardRepository.removeCard(userId, card);
   };
   return (
     <section className={styles.maker}>
