@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Editor from "../editor/editor";
 import Footer from "../footer/footer";
@@ -15,9 +15,11 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
   const history = useHistory();
 
   //로그 아웃 함수
-  const onLogout = () => {
+  //함수가 계속 호출되어도 동일한 데이터를 사용하기 위해 훅 사용
+  //but, authService가 바뀌면 다시 데이터를 전달 받음
+  const onLogout = useCallback(() => {
     authService.logout();
-  };
+  }, [authService]);
 
   //realtime database
   //mount가 되었을때, 사용자 아이디가 변경되었을때 사용
