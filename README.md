@@ -8,7 +8,7 @@ React JS Fundamentals Responsive Card Maker
 - [x] JSX
 - [x] React(memo)
 - [x] Hooks(useState, useEffect, useHistory, useRef, useCallback)
-- [x] Router(BrowserRouter, Route, Switch)
+- [x] Router(HashRouter, Route, Switch)
 - [x] Postcss module
 - [x] Firebase Realtime Database Set, Remove, Sync
 - [x] Cloudinary Image Upload

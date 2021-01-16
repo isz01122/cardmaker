@@ -1,13 +1,13 @@
 import React from "react";
 import Login from "./components/login/login";
 import styles from "./app.module.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import Maker from "./components/maker/maker";
 
 function App({ FileInput, authService, cardRepository }) {
   return (
     <div className={styles.app}>
-      <BrowserRouter>
+      <HashRouter>
         <Switch>
           <Route exact path="/">
             <Login authService={authService} />
@@ -20,7 +20,7 @@ function App({ FileInput, authService, cardRepository }) {
             />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
