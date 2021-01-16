@@ -14,7 +14,10 @@ const ImageFileInput = memo(({ imageUploader, name, onFileChange }) => {
     const uploaded = await imageUploader.upload(event.target.files[0]);
     setLoading(false);
     onFileChange({
-      name: uploaded.original_filename,
+      name:
+        uploaded.original_filename.length > 10
+          ? `${uploaded.original_filename.slice(0, 10)}...`
+          : uploaded.original_filename,
       url: uploaded.url,
     });
   };

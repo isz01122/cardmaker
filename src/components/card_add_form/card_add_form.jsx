@@ -13,7 +13,6 @@ const CardAddForm = memo(({ FileInput, onAdd }) => {
   const [file, setFiles] = useState({ fileName: null, fileURL: null });
 
   const onFileChange = (file) => {
-    console.log(file);
     setFiles({
       fileName: file.name,
       fileURL: file.url,
