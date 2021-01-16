@@ -34,7 +34,7 @@ const ImageFileInput = ({ imageUploader, name, onFileChange }) => {
           className={`${styles.button} ${name ? styles.pink : styles.grey}`}
           onClick={onButtonClick}
         >
-          {name || "no file"}
+          {name || "사진 등록"}
         </button>
       )}
       {loading && <div className={styles.loading}></div>}

@@ -31,7 +31,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
     return () => {
       stopSync();
     };
-  }, [userId]);
+  }, [userId, cardRepository]);
 
   //로그 아웃이 되어 유저 정보가 없어진다면 메인화면으로 보낸다
   useEffect(() => {
@@ -42,7 +42,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
         history.push("/");
       }
     });
-  });
+  }, [authService, userId, history]);
 
   const createOrupdateCard = (card) => {
     setCards((cards) => {

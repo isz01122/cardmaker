@@ -30,7 +30,8 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
-  const onSubmit = () => {
+  const onSubmit = (event) => {
+    event.preventDefault();
     deleteCard(card);
   };
 
@@ -89,7 +90,7 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
       <div className={styles.fileinput}>
         <FileInput name={fileName} onFileChange={onFileChange} />
       </div>
-      <Button name="Delete" onClick={onSubmit} />
+      <Button name="삭제" onClick={onSubmit} />
     </form>
   );
 };
