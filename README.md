@@ -2,6 +2,12 @@
 
 React JS Fundamentals Responsive Card Maker
 
+## Preview
+<a href="url">
+  <img src="https://user-images.githubusercontent.com/43328761/104827706-21360000-58a4-11eb-9d07-0b6e684d083a.png" width="640" height="360">
+</a>
+
+
 ## Features
 
 - [x] Functional Programming
